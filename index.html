@@ -1,85 +1,293 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#f7f7f3" />
-  <title>Gather — group lunch, made easy</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="Gather home"><span class="brand-mark">g</span><span>gather<span class="brand-dot">.</span></span></a>
-    <div class="location"><span class="location-pin">⌖</span><span><small>ORDERING AT</small><strong>Food Republic · Wisma Atria</strong></span><span class="chevron">⌄</span></div>
-    <nav class="role-switch" aria-label="Choose interface">
-      <button class="role-btn active" data-view="customer">For diners</button>
-      <button class="role-btn" data-view="stall">For stalls</button>
-    </nav>
-    <button class="avatar" aria-label="Profile">J</button>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f7f3" />
+    <title>Demo</title>
 
-  <main id="customerView" class="page customer-page">
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow"><span class="live-dot"></span> LUNCH, TOGETHER</div>
-        <h1>Good food.<br><em>One pickup.</em></h1>
-        <p>Order from your favourite stalls with your crew. Everything will be ready at the same time.</p>
-        <div class="hero-meta"><span class="meta-icon">◷</span><span>Today, 12:30 – 12:45 pm</span><span class="meta-divider"></span><span>Pickup together</span></div>
-      </div>
-      <div class="hero-art" aria-label="Illustration of a shared lunch">
-        <div class="sun"></div><span class="art-spark spark-one">✳</span><span class="art-spark spark-two">✦</span>
-        <div class="plate"><div class="rice"></div><div class="greens"></div><div class="tomato"></div><div class="egg"></div></div>
-        <div class="art-note"><span>✦</span> lunch is better together</div>
-        <div class="mini-bubble">4 hungry<br>friends ↗</div>
-      </div>
-    </section>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-    <section class="group-strip">
-      <div class="group-people"><div class="face face-a">J</div><div class="face face-b">M</div><div class="face face-c">A</div><div class="face face-plus">+</div></div>
-      <div class="group-copy"><strong id="groupCount">3 people are in your group</strong><span>Invite your crew to add what they’re craving</span></div>
-      <div class="group-code"><span>GROUP CODE</span><strong id="groupCode">LUNCH-4K2</strong><button id="copyCode" class="copy-btn">Copy invite ↗</button></div>
-    </section>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Demo home">Demo</a>
 
-    <div class="section-heading">
-      <div><div class="eyebrow muted">THE FOOD COURT FAVOURITES</div><h2>What sounds good?</h2></div>
-      <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Find a dish or stall" aria-label="Find a dish or stall"></label>
-    </div>
-    <div class="filters" role="group" aria-label="Filter stalls">
-      <button class="filter-chip selected" data-filter="All">All stalls <span>06</span></button><button class="filter-chip" data-filter="Rice">Rice & noodles</button><button class="filter-chip" data-filter="Local">Local favourites</button><button class="filter-chip" data-filter="Quick">Quick bites</button>
-    </div>
-    <section id="stallGrid" class="stall-grid" aria-live="polite"></section>
-    <footer class="footer-note"><span>✳</span> Made for the lunch break you actually want.</footer>
-  </main>
+      <div class="location">
+        <span class="location-pin" aria-hidden="true">⌖</span>
+        <label class="location-select">
+          <small>ORDERING AT</small>
+          <select id="locationSelect" aria-label="Choose hawker location">
+            <option value="542">Blk 542 hawker</option>
+            <option value="344">Blk 344 hawker</option>
+          </select>
+        </label>
+      </div>
 
-  <main id="stallView" class="page stall-page hidden">
-    <div class="dashboard-head"><div><div class="eyebrow muted">STALL PARTNER · FOOD REPUBLIC</div><h1>Your lunch, <em>in sync.</em></h1><p>Keep your orders manageable and your guests moving together.</p></div><div class="open-status"><span class="live-dot"></span><span>Taking orders</span><button id="openToggle" class="status-toggle" aria-label="Toggle taking orders"><span></span></button></div></div>
-    <section class="dashboard-summary">
-      <article class="summary-card"><span class="summary-label">ORDERS TODAY</span><strong>28</strong><span class="summary-foot positive">↑ 6 from yesterday</span><span class="summary-icon">↗</span></article>
-      <article class="summary-card"><span class="summary-label">NEXT PICKUP WINDOW</span><strong class="summary-time">12:30 <small>– 12:45</small></strong><span class="summary-foot">In about 18 minutes</span><span class="summary-icon">◷</span></article>
-      <article class="summary-card capacity-summary"><span class="summary-label">SLOT CAPACITY</span><strong><span id="capacityValue">12</span><small> orders</small></strong><span class="summary-foot"><span id="capacityUsed">8</span> orders placed so far</span><span class="capacity-bar"><i id="capacityProgress"></i></span></article>
-    </section>
-    <section class="dashboard-columns">
-      <div class="panel capacity-panel"><div class="panel-heading"><div><div class="eyebrow muted">PLAN AHEAD</div><h2>Pickup capacity</h2></div><span class="panel-icon">◷</span></div><p class="panel-intro">Set a limit for each pickup window. When a slot fills up, guests can choose another time.</p>
-        <div class="slot-row"><div class="slot-time"><strong>12:30 – 12:45</strong><span>Today · Next pickup</span></div><div class="slot-control"><label for="capacitySlider"><span>Order limit</span><strong><span id="sliderValue">12</span> orders</strong></label><input id="capacitySlider" type="range" min="4" max="24" value="12"><div class="range-labels"><span>4 orders</span><span>24 orders</span></div></div></div>
-        <div class="slot-row"><div class="slot-time"><strong>12:45 – 1:00</strong><span>Today · Next slot</span></div><div class="slot-next"><span class="slot-pill">15 orders</span><span>available</span><button class="edit-slot" data-message="Next slot is ready to edit">Edit</button></div></div>
-        <button id="addSlot" class="add-slot">＋ Add pickup window</button>
+      <nav class="role-switch" aria-label="Choose interface">
+        <button class="role-btn active" data-view="customer">For diners</button>
+        <button class="role-btn" data-view="stall">For stalls</button>
+      </nav>
+
+      <button class="avatar" aria-label="Profile">J</button>
+    </header>
+
+    <main id="customerView" class="page customer-page">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="live-dot"></span> LUNCH, TOGETHER</div>
+          <h1>Good food.<br /><em>One pickup.</em></h1>
+          <p>
+            Order from your favourite stalls with your crew. Everything will be
+            ready at the same time.
+          </p>
+          <div class="hero-meta">
+            <span class="meta-icon">◷</span>
+            <span>Today, 12:30 – 12:45 pm</span>
+            <span class="meta-divider"></span>
+            <span>Pickup together</span>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-label="Illustration of a shared lunch">
+          <div class="sun"></div>
+          <span class="art-spark spark-one">✳</span>
+          <span class="art-spark spark-two">✦</span>
+          <div class="plate">
+            <div class="rice"></div>
+            <div class="greens"></div>
+            <div class="tomato"></div>
+            <div class="egg"></div>
+          </div>
+          <div class="art-note"><span>✦</span> lunch is better together</div>
+          <div class="mini-bubble">4 hungry<br />friends ↗</div>
+        </div>
+      </section>
+
+      <section class="group-strip">
+        <div class="group-people">
+          <div class="face face-a">J</div>
+          <div class="face face-b">M</div>
+          <div class="face face-c">A</div>
+          <div class="face face-plus">+</div>
+        </div>
+
+        <div class="group-copy">
+          <strong id="groupCount">3 people are in your group</strong>
+          <span>Invite your crew to add what they’re craving</span>
+        </div>
+
+        <div class="group-code">
+          <span>GROUP CODE</span>
+          <strong id="groupCode">LUNCH-4K2</strong>
+          <button id="copyCode" class="copy-btn">Copy invite ↗</button>
+        </div>
+      </section>
+
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow muted">THE FOOD COURT FAVOURITES</div>
+          <h2>What sounds good?</h2>
+        </div>
+        <label class="search">
+          <span>⌕</span>
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="Find a dish or stall"
+            aria-label="Find a dish or stall"
+          />
+        </label>
       </div>
-      <div class="panel orders-panel"><div class="panel-heading"><div><div class="eyebrow muted">UP NEXT</div><h2>Incoming orders <span class="order-count">3</span></h2></div><button class="text-button" id="viewAll">View all ↗</button></div><p class="panel-intro">Ready for the 12:30 – 12:45 pm pickup window.</p>
-        <div class="order-list" id="orderList">
-          <article class="order-item"><div class="order-avatar oa-green">JL</div><div class="order-info"><strong>Jamie Lee <span class="order-badge">Group order</span></strong><span>2 items · #FR-208</span></div><div class="order-price">$18.80</div><button class="order-action" aria-label="Mark Jamie's order ready">✓</button></article>
-          <article class="order-item"><div class="order-avatar oa-peach">MC</div><div class="order-info"><strong>Marcus Chua</strong><span>1 item · #FR-207</span></div><div class="order-price">$8.50</div><button class="order-action" aria-label="Mark Marcus's order ready">✓</button></article>
-          <article class="order-item"><div class="order-avatar oa-lilac">AT</div><div class="order-info"><strong>Amelia Tan</strong><span>1 item · #FR-206</span></div><div class="order-price">$7.20</div><button class="order-action" aria-label="Mark Amelia's order ready">✓</button></article>
-        </div><div class="orders-foot"><span><span class="live-dot"></span> Updates as orders come in</span><span id="readyCount">0 ready</span></div>
+
+      <div class="filters" role="group" aria-label="Filter stalls">
+        <button class="filter-chip selected" data-filter="All">
+          All stalls <span id="allStallCount">06</span>
+        </button>
+        <button class="filter-chip" data-filter="Rice">Rice &amp; noodles</button>
+        <button class="filter-chip" data-filter="Local">Local favourites</button>
+        <button class="filter-chip" data-filter="Quick">Quick bites</button>
       </div>
-    </section>
-    <div class="stall-tip"><span class="tip-icon">✦</span><div><strong>Small batches, smoother lunch.</strong><span>Guests see live slot availability, so your team can prep at a steady pace.</span></div><span class="tip-arrow">↗</span></div>
-    <footer class="footer-note"><span>✳</span> A calmer lunch rush starts here.</footer>
-  </main>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <aside id="cartDock" class="cart-dock hidden" aria-live="polite"><div class="cart-main"><span class="cart-count" id="cartCount">0</span><span><strong id="cartSummary">Your group order</strong><small id="cartItems">No dishes yet</small></span></div><div class="cart-total" id="cartTotal">$0.00</div><button id="checkoutBtn" class="checkout-btn">Review order <span>→</span></button></aside>
-  <script src="app.js"></script>
-</body>
+
+      <section id="stallGrid" class="stall-grid" aria-live="polite"></section>
+
+      <footer class="footer-note">
+        <span>✳</span> Made for the lunch break you actually want.
+      </footer>
+    </main>
+
+    <main id="stallView" class="page stall-page hidden">
+      <div class="dashboard-head">
+        <div>
+          <div class="eyebrow muted">STALL PARTNER · FOOD REPUBLIC</div>
+          <h1>Your lunch, <em>in sync.</em></h1>
+          <p>Keep your orders manageable and your guests moving together.</p>
+        </div>
+
+        <div class="open-status">
+          <span class="live-dot"></span>
+          <span>Taking orders</span>
+          <button id="openToggle" class="status-toggle" aria-label="Toggle taking orders">
+            <span></span>
+          </button>
+        </div>
+      </div>
+
+      <section class="dashboard-summary">
+        <article class="summary-card">
+          <span class="summary-label">ORDERS TODAY</span>
+          <strong>28</strong>
+          <span class="summary-foot positive">↑ 6 from yesterday</span>
+          <span class="summary-icon">↗</span>
+        </article>
+
+        <article class="summary-card">
+          <span class="summary-label">NEXT PICKUP WINDOW</span>
+          <strong class="summary-time">12:30 <small>– 12:45</small></strong>
+          <span class="summary-foot">In about 18 minutes</span>
+          <span class="summary-icon">◷</span>
+        </article>
+
+        <article class="summary-card capacity-summary">
+          <span class="summary-label">SLOT CAPACITY</span>
+          <strong><span id="capacityValue">12</span><small> orders</small></strong>
+          <span class="summary-foot">
+            <span id="capacityUsed">8</span> orders placed so far
+          </span>
+          <span class="capacity-bar"><i id="capacityProgress"></i></span>
+        </article>
+      </section>
+
+      <section class="dashboard-columns">
+        <div class="panel capacity-panel">
+          <div class="panel-heading">
+            <div>
+              <div class="eyebrow muted">PLAN AHEAD</div>
+              <h2>Pickup capacity</h2>
+            </div>
+            <span class="panel-icon">◷</span>
+          </div>
+
+          <p class="panel-intro">
+            Set a limit for each pickup window. When a slot fills up, guests can
+            choose another time.
+          </p>
+
+          <div class="slot-row">
+            <div class="slot-time">
+              <strong>12:30 – 12:45</strong>
+              <span>Today · Next pickup</span>
+            </div>
+            <div class="slot-control">
+              <label for="capacitySlider">
+                <span>Order limit</span>
+                <strong><span id="sliderValue">12</span> orders</strong>
+              </label>
+              <input id="capacitySlider" type="range" min="4" max="24" value="12" />
+              <div class="range-labels">
+                <span>4 orders</span>
+                <span>24 orders</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="slot-row">
+            <div class="slot-time">
+              <strong>12:45 – 1:00</strong>
+              <span>Today · Next slot</span>
+            </div>
+            <div class="slot-next">
+              <span class="slot-pill">15 orders</span>
+              <span>available</span>
+              <button class="edit-slot" data-message="Next slot is ready to edit">Edit</button>
+            </div>
+          </div>
+
+          <button id="addSlot" class="add-slot">＋ Add pickup window</button>
+        </div>
+
+        <div class="panel orders-panel">
+          <div class="panel-heading">
+            <div>
+              <div class="eyebrow muted">UP NEXT</div>
+              <h2>Incoming orders <span class="order-count">3</span></h2>
+            </div>
+            <button class="text-button" id="viewAll">View all ↗</button>
+          </div>
+
+          <p class="panel-intro">Ready for the 12:30 – 12:45 pm pickup window.</p>
+
+          <div class="order-list" id="orderList">
+            <article class="order-item">
+              <div class="order-avatar oa-green">JL</div>
+              <div class="order-info">
+                <strong>
+                  Jamie Lee <span class="order-badge">Group order</span>
+                </strong>
+                <span>2 items · #FR-208</span>
+              </div>
+              <div class="order-price">$18.80</div>
+              <button class="order-action" aria-label="Mark Jamie's order ready">✓</button>
+            </article>
+
+            <article class="order-item">
+              <div class="order-avatar oa-peach">MC</div>
+              <div class="order-info">
+                <strong>Marcus Chua</strong>
+                <span>1 item · #FR-207</span>
+              </div>
+              <div class="order-price">$8.50</div>
+              <button class="order-action" aria-label="Mark Marcus's order ready">✓</button>
+            </article>
+
+            <article class="order-item">
+              <div class="order-avatar oa-lilac">AT</div>
+              <div class="order-info">
+                <strong>Amelia Tan</strong>
+                <span>1 item · #FR-206</span>
+              </div>
+              <div class="order-price">$7.20</div>
+              <button class="order-action" aria-label="Mark Amelia's order ready">✓</button>
+            </article>
+          </div>
+
+          <div class="orders-foot">
+            <span><span class="live-dot"></span> Updates as orders come in</span>
+            <span id="readyCount">0 ready</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="stall-tip">
+        <span class="tip-icon">✦</span>
+        <div>
+          <strong>Small batches, smoother lunch.</strong>
+          <span>Guests see live slot availability, so your team can prep at a steady pace.</span>
+        </div>
+        <span class="tip-arrow">↗</span>
+      </div>
+
+      <footer class="footer-note">
+        <span>✳</span> A calmer lunch rush starts here.
+      </footer>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <aside id="cartDock" class="cart-dock hidden" aria-live="polite">
+      <div class="cart-main">
+        <span class="cart-count" id="cartCount">0</span>
+        <span>
+          <strong id="cartSummary">Your group order</strong>
+          <small id="cartItems">No dishes yet</small>
+        </span>
+      </div>
+      <div class="cart-total" id="cartTotal">$0.00</div>
+      <button id="checkoutBtn" class="checkout-btn">
+        Review order <span>→</span>
+      </button>
+    </aside>
+
+    <script src="app.js"></script>
+  </body>
 </html>
